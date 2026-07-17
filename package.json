@@ -1,0 +1,10 @@
+{
+  "name": "carthabot-website",
+  "version": "1.0.0",
+  "description": "Marketing site for the CarthaBot educational robot and its Companion app — claymorphism design, real 3D robot model, EN/FR.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

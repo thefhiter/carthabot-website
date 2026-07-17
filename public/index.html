@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CarthaBot — The friendly robot that teaches kids to build, connect, code & learn</title>
+  <meta name="description" content="CarthaBot is an educational robot for children by FAB619. Build it, connect it, code it with the free CarthaBot Companion app for Windows — block coding, a 3D playground, drawing with your hands and more." />
+  <meta property="og:title" content="CarthaBot — a robot friend that teaches kids to code" />
+  <meta property="og:description" content="Build. Connect. Code. Learn. Meet CarthaBot and its free Companion app for Windows." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://carthabot.vercel.app" />
+  <meta name="theme-color" content="#4F46E5" />
+  <link rel="canonical" href="https://carthabot.vercel.app" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preload" href="/fonts/Baloo2-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/ComicNeue-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script type="importmap">
+    { "imports": { "three": "/lib/three.module.js" } }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <!-- ==================== 3D stage (fixed, behind everything) ==================== -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+
+  <!-- ==================== Header ==================== -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#home" aria-label="CarthaBot — home">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="12" width="36" height="26" rx="9" fill="#4F46E5"/><circle cx="18" cy="25" r="4.5" fill="#fff"/><circle cx="30" cy="25" r="4.5" fill="#fff"/><circle cx="18" cy="25" r="2" fill="#1E1B4B"/><circle cx="30" cy="25" r="2" fill="#1E1B4B"/><rect x="15" y="31" width="18" height="3" rx="1.5" fill="#A5B4FC"/><rect x="21.5" y="4" width="5" height="8" rx="2.5" fill="#EA580C"/><circle cx="24" cy="4.5" r="3.2" fill="#F9A826"/></svg>
+        <span class="brand-name">Cartha<span>Bot</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#pillars" data-i18n="nav.learn">Learn</a></li>
+        <li><a href="#modes" data-i18n="nav.robot">The Robot</a></li>
+        <li><a href="#app" data-i18n="nav.app">Companion App</a></li>
+        <li><a href="#specs" data-i18n="nav.specs">Specs</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="langToggle" class="lang-toggle" type="button" aria-label="Passer en français">FR</button>
+        <a class="btn btn-accent btn-sm" href="#download" data-i18n="nav.download">Get the app</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ==================== Hero ==================== -->
+    <section class="hero" id="home">
+      <div class="blob blob-a" aria-hidden="true"></div>
+      <div class="blob blob-b" aria-hidden="true"></div>
+      <div class="blob blob-c" aria-hidden="true"></div>
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <p class="hero-kicker reveal" data-i18n="hero.kicker">Made in Tunisia by FAB619 🤖</p>
+          <h1 class="reveal" data-i18n-html="hero.title">Meet <em>CarthaBot</em>, the robot friend that teaches kids to code</h1>
+          <p class="hero-sub reveal" data-i18n="hero.sub">Build it. Connect it. Program it with colourful blocks, a 3D playground, claps, drawings and pure imagination.</p>
+          <div class="hero-ctas reveal">
+            <a class="btn btn-accent" href="#download" data-i18n="hero.ctaApp">Download the free app</a>
+            <a class="btn btn-ghost" href="#modes" data-i18n="hero.ctaRobot">Meet the robot</a>
+          </div>
+          <ul class="hero-badges reveal" aria-label="Highlights">
+            <li data-i18n="hero.badge1">Ages 4–14</li>
+            <li data-i18n="hero.badge2">No account needed</li>
+            <li data-i18n="hero.badge3">French &amp; English</li>
+          </ul>
+        </div>
+        <div class="hero-stage" aria-hidden="true">
+          <div class="stage-placeholder" id="stagePlaceholder">
+            <svg viewBox="0 0 120 120" class="placeholder-bot" aria-hidden="true"><rect x="18" y="34" width="84" height="54" rx="18" fill="#4F46E5"/><circle cx="45" cy="60" r="10" fill="#fff"/><circle cx="75" cy="60" r="10" fill="#fff"/><circle cx="45" cy="60" r="4.5" fill="#1E1B4B"/><circle cx="75" cy="60" r="4.5" fill="#1E1B4B"/><rect x="42" y="74" width="36" height="6" rx="3" fill="#A5B4FC"/><rect x="54" y="14" width="12" height="18" rx="6" fill="#EA580C"/><circle cx="60" cy="14" r="7" fill="#F9A826"/><circle cx="26" cy="98" r="10" fill="#1E1B4B"/><circle cx="94" cy="98" r="10" fill="#1E1B4B"/></svg>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#pillars" aria-label="Scroll down">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 5v14m0 0-6-6m6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <!-- ==================== Ribbon ==================== -->
+    <div class="ribbon" aria-hidden="true">
+      <div class="ribbon-track">
+        <span>Build</span><i>★</i><span>Connect</span><i>★</i><span>Code</span><i>★</i><span>Learn</span><i>★</i>
+        <span>Build</span><i>★</i><span>Connect</span><i>★</i><span>Code</span><i>★</i><span>Learn</span><i>★</i>
+        <span>Build</span><i>★</i><span>Connect</span><i>★</i><span>Code</span><i>★</i><span>Learn</span><i>★</i>
+      </div>
+    </div>
+
+    <!-- ==================== Pillars ==================== -->
+    <section class="section" id="pillars">
+      <div class="container">
+        <h2 class="reveal" data-i18n="pillars.title">One robot, four superpowers</h2>
+        <p class="section-sub reveal" data-i18n="pillars.sub">CarthaBot turns screen time into maker time with a complete learning journey.</p>
+        <div class="card-grid pillar-grid">
+          <article class="clay-card reveal" style="--card-tint:#FFE7CC">
+            <div class="card-icon" style="--icon-bg:#F7941C">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 3.2a5 5 0 0 0-6.1 6.9L3 14.6V21h6.4l4.5-4.5a5 5 0 0 0 6.9-6.1l-3.3 3.3-3.4-1.4-1.4-3.4 3.5-3.2Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 data-i18n="pillars.build.t">Build</h3>
+            <p data-i18n="pillars.build.d">Turn ideas into real structures — snap on chassis, wheels and accessories, and make CarthaBot yours.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#D9F6E4">
+            <div class="card-icon" style="--icon-bg:#16A34A">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="18.5" cy="5.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="18.5" cy="18.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M7.9 10.9 16 6.6M7.9 13.1l8.1 4.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+            </div>
+            <h3 data-i18n="pillars.connect.t">Connect</h3>
+            <p data-i18n="pillars.connect.d">Link sensors, lights and friends — kids learn how networks and teams work by connecting things together.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#E3E1FD">
+            <div class="card-icon" style="--icon-bg:#4F46E5">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 data-i18n="pillars.code.t">Code</h3>
+            <p data-i18n="pillars.code.d">From colourful event blocks at age 4 to real Python at 14 — logic and problem-solving grow with your child.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#FFDDEB">
+            <div class="card-icon" style="--icon-bg:#DB2777">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 8 12 13l7.5-3.9V15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.8V16c0 1.7 2.5 3 5.5 3s5.5-1.3 5.5-3v-5.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 data-i18n="pillars.learn.t">Learn</h3>
+            <p data-i18n="pillars.learn.d">Experiment and discover — science, technology and engineering through play, missions and challenges.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Modes ==================== -->
+    <section class="section section-modes" id="modes">
+      <div class="container">
+        <h2 class="reveal" data-i18n="modes.title">Four moods, one happy robot</h2>
+        <p class="section-sub reveal" data-i18n="modes.sub">Tap a mood — watch CarthaBot's light ring change colour, just like the real robot.</p>
+        <div class="modes-layout">
+          <div class="mode-cards" role="group" aria-label="CarthaBot modes">
+            <button class="mode-card reveal is-active" type="button" data-mode="avoider" style="--mode:#F7941C" aria-pressed="true">
+              <span class="mode-dot" aria-hidden="true"></span>
+              <span class="mode-body">
+                <strong data-i18n="modes.avoider.t">Obstacle Avoider</strong>
+                <span data-i18n="modes.avoider.d">Infrared eyes spot obstacles and CarthaBot politely drives around them.</span>
+              </span>
+            </button>
+            <button class="mode-card reveal" type="button" data-mode="follower" style="--mode:#16A34A" aria-pressed="false">
+              <span class="mode-dot" aria-hidden="true"></span>
+              <span class="mode-body">
+                <strong data-i18n="modes.follower.t">Line Follower</strong>
+                <span data-i18n="modes.follower.d">Draw a black line and CarthaBot follows the track like a tiny race car.</span>
+              </span>
+            </button>
+            <button class="mode-card reveal" type="button" data-mode="friendly" style="--mode:#F164A2" aria-pressed="false">
+              <span class="mode-dot" aria-hidden="true"></span>
+              <span class="mode-body">
+                <strong data-i18n="modes.friendly.t">Friendly</strong>
+                <span data-i18n="modes.friendly.d">Drive it with the big colourful buttons — forward, back, spin and dance!</span>
+              </span>
+            </button>
+            <button class="mode-card reveal" type="button" data-mode="obedient" style="--mode:#587FED" aria-pressed="false">
+              <span class="mode-dot" aria-hidden="true"></span>
+              <span class="mode-body">
+                <strong data-i18n="modes.obedient.t">Obedient</strong>
+                <span data-i18n="modes.obedient.d">Hold out your hand and CarthaBot follows it around like a loyal puppy.</span>
+              </span>
+            </button>
+          </div>
+          <div class="modes-stage" aria-hidden="true"><!-- the fixed 3D robot parks here on scroll --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Companion App ==================== -->
+    <section class="section section-app" id="app">
+      <div class="container">
+        <p class="section-kicker reveal" data-i18n="app.kicker">Free for Windows</p>
+        <h2 class="reveal" data-i18n="app.title">The CarthaBot Companion app</h2>
+        <p class="section-sub reveal" data-i18n="app.sub">Everything your child needs to bring CarthaBot to life — one playful app, no account, in French and English.</p>
+        <div class="card-grid app-grid">
+          <article class="clay-card reveal" style="--card-tint:#E3E1FD">
+            <div class="card-icon" style="--icon-bg:#4F46E5"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="8" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="13" y="5" width="8" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="8" y="13" width="8" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/></svg></div>
+            <h3 data-i18n="app.f1.t">Coding for under-6s</h3>
+            <p data-i18n="app.f1.d">Pair picture events with actions — "when I hear a clap → turn green!" — and press play.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#D9F6E4">
+            <div class="card-icon" style="--icon-bg:#16A34A"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16.5V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9.5M2 19h20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="m9 9 6 3.5L9 16Z" fill="currentColor"/></svg></div>
+            <h3 data-i18n="app.f2.t">3D playground &amp; missions</h3>
+            <p data-i18n="app.f2.d">Test programs on a virtual CarthaBot first — six worlds, coins, missions and stars to earn.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#FFE7CC">
+            <div class="card-icon" style="--icon-bg:#EA580C"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c0-4 2.5-6 5-6M15.5 4.5l4 4L9 19H5v-4L15.5 4.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3 data-i18n="app.f3.t">Draw with your hands</h3>
+            <p data-i18n="app.f3.d">Sketch in the air in front of the webcam — CarthaBot picks up a pen and draws it on paper.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#FFDDEB">
+            <div class="card-icon" style="--icon-bg:#DB2777"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></div>
+            <h3 data-i18n="app.f4.t">Claps &amp; sounds</h3>
+            <p data-i18n="app.f4.d">CarthaBot has real ears — clap your hands and it reacts, with a built-in microphone test.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#DBEFFE">
+            <div class="card-icon" style="--icon-bg:#0284C7"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 9a15 15 0 0 1 19 0M5.5 12.5a10.5 10.5 0 0 1 13 0M8.5 16a6 6 0 0 1 7 0" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.6" fill="currentColor"/></svg></div>
+            <h3 data-i18n="app.f5.t">Wireless coding</h3>
+            <p data-i18n="app.f5.d">Send programs over Wi-Fi or Bluetooth — no cable chase, the robot roams free.</p>
+          </article>
+          <article class="clay-card reveal" style="--card-tint:#E3E1FD">
+            <div class="card-icon" style="--icon-bg:#4F46E5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8h10M7 12h6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m14 15 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3 data-i18n="app.f6.t">Blocks to Python</h3>
+            <p data-i18n="app.f6.d">CarthaSoft block coding for beginners, a real Python editor for big kids — one smooth ramp.</p>
+          </article>
+        </div>
+
+        <div class="download-card clay-card reveal" id="download">
+          <div class="download-copy">
+            <h3 data-i18n="dl.title">Ready to play?</h3>
+            <p data-i18n="dl.sub">Grab the CarthaBot Companion app — free, offline-friendly, made with love by FAB619.</p>
+          </div>
+          <div class="download-action">
+            <a class="btn btn-accent btn-lg" href="https://github.com/thefhiter/carthabot-companion-junior/releases" rel="noopener" data-i18n="dl.btn">Download for Windows</a>
+            <span class="download-note" data-i18n="dl.note">Windows 10/11 • French &amp; English • No account</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Specs ==================== -->
+    <section class="section section-specs" id="specs">
+      <div class="container">
+        <h2 class="reveal" data-i18n="specs.title">Under the shell</h2>
+        <p class="section-sub reveal" data-i18n="specs.sub">Serious robotics, wrapped in a friendly face.</p>
+        <dl class="spec-grid">
+          <div class="spec-chip reveal"><dt data-i18n="specs.s1.t">Top speed</dt><dd>20 cm/s</dd></div>
+          <div class="spec-chip reveal"><dt data-i18n="specs.s2.t">Battery</dt><dd data-i18n="specs.s2.d">Li-Po 3.7 V · 1500 mAh</dd></div>
+          <div class="spec-chip reveal"><dt data-i18n="specs.s3.t">Play time</dt><dd data-i18n="specs.s3.d">2+ hours per charge</dd></div>
+          <div class="spec-chip reveal"><dt data-i18n="specs.s4.t">Eyes</dt><dd data-i18n="specs.s4.d">9 infrared sensors</dd></div>
+          <div class="spec-chip reveal"><dt data-i18n="specs.s5.t">Lights</dt><dd data-i18n="specs.s5.d">13 RGB LEDs</dd></div>
+          <div class="spec-chip reveal"><dt data-i18n="specs.s6.t">Ears &amp; voice</dt><dd data-i18n="specs.s6.d">Microphone + speaker</dd></div>
+          <div class="spec-chip reveal"><dt data-i18n="specs.s7.t">Brain</dt><dd>RP2040 · MicroPython</dd></div>
+          <div class="spec-chip reveal"><dt data-i18n="specs.s8.t">Links</dt><dd>USB · Wi-Fi · Bluetooth</dd></div>
+        </dl>
+        <p class="custom-note reveal" data-i18n="specs.custom">Make it yours: 3D-printed or metal chassis, colour packs, snap-on accessories and sticker sheets.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== Footer ==================== -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="brand-name light">Cartha<span>Bot</span></span>
+        <p data-i18n="footer.tag">An educational robot designed and built by FAB619 in Tunisia.</p>
+        <p class="footer-contact"><a href="tel:+21654544731" aria-label="Phone">+216 54 54 47 31</a></p>
+        <div class="socials">
+          <a href="https://www.facebook.com/fab619" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V5h-3a4 4 0 0 0-4 4v2H7v3h3v6h3v-6h3l1-3h-4V9a1 1 0 0 1 1-1Z" fill="currentColor"/></svg></a>
+          <a href="https://www.instagram.com/fab619" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg></a>
+          <a href="https://github.com/FAB619" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.9-.3 2.8 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1a3.6 3.6 0 0 1 .1 2.7 3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-partners">
+        <h3 data-i18n="footer.partners">Partners</h3>
+        <ul>
+          <li>FAB619</li><li>Mecapoly</li><li>Advance Tech</li><li>Raspberry Pi</li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3 data-i18n="footer.explore">Explore</h3>
+        <ul>
+          <li><a href="#pillars" data-i18n="nav.learn">Learn</a></li>
+          <li><a href="#modes" data-i18n="nav.robot">The Robot</a></li>
+          <li><a href="#app" data-i18n="nav.app">Companion App</a></li>
+          <li><a href="https://github.com/thefhiter/carthabot-companion-junior/releases" rel="noopener" data-i18n="nav.download">Get the app</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-copy container">© 2026 FAB619 — CarthaBot. <span data-i18n="footer.rights">All rights reserved.</span></p>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

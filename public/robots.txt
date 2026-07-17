@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://carthabot.vercel.app/sitemap.xml
