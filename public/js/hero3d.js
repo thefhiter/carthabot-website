@@ -53,7 +53,7 @@ export function start() {
   loader.setDRACOLoader(draco);
 
   // bump ?v= whenever the model changes — /assets/ is cached immutable
-  loader.load('/assets/carthabot.glb?v=5', (gltf) => {
+  loader.load('/assets/carthabot.glb?v=6', (gltf) => {
     const model = gltf.scene;
 
     // normalise: centre the robot and scale it to a friendly world size
