@@ -13,6 +13,7 @@
     'hero.ctaApp': "Télécharger l'app gratuite", 'hero.ctaRobot': 'Découvrir le robot',
     'hero.badge1': '4 à 14 ans', 'hero.badge2': 'Sans compte', 'hero.badge3': 'Français & anglais',
     'hero.drag': '✋ Fais-moi tourner !',
+    'partners.label': 'Avec nos partenaires',
     'pillars.title': 'Un robot, quatre super-pouvoirs',
     'pillars.sub': "CarthaBot transforme le temps d'écran en temps de création avec un parcours complet.",
     'pillars.build.t': 'Construire', 'pillars.build.d': 'Transformer les idées en vraies structures — châssis, roues et accessoires à assembler pour un CarthaBot unique.',
