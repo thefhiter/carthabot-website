@@ -23,9 +23,6 @@
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
-  <!-- ==================== 3D stage (fixed, behind everything) ==================== -->
-  <canvas id="stage" aria-hidden="true"></canvas>
-
   <!-- ==================== Header ==================== -->
   <header class="site-header">
     <nav class="nav" aria-label="Main">
@@ -68,9 +65,13 @@
             <li data-i18n="hero.badge3">French &amp; English</li>
           </ul>
         </div>
-        <div class="hero-stage" aria-hidden="true">
-          <div class="stage-placeholder" id="stagePlaceholder">
-            <svg viewBox="0 0 120 120" class="placeholder-bot" aria-hidden="true"><rect x="18" y="34" width="84" height="54" rx="18" fill="#4F46E5"/><circle cx="45" cy="60" r="10" fill="#fff"/><circle cx="75" cy="60" r="10" fill="#fff"/><circle cx="45" cy="60" r="4.5" fill="#1E1B4B"/><circle cx="75" cy="60" r="4.5" fill="#1E1B4B"/><rect x="42" y="74" width="36" height="6" rx="3" fill="#A5B4FC"/><rect x="54" y="14" width="12" height="18" rx="6" fill="#EA580C"/><circle cx="60" cy="14" r="7" fill="#F9A826"/><circle cx="26" cy="98" r="10" fill="#1E1B4B"/><circle cx="94" cy="98" r="10" fill="#1E1B4B"/></svg>
+        <div class="hero-stage">
+          <div class="viewer" id="viewer">
+            <canvas id="stage" aria-hidden="true"></canvas>
+            <div class="stage-placeholder" id="stagePlaceholder" aria-hidden="true">
+              <svg viewBox="0 0 120 120" class="placeholder-bot"><rect x="18" y="34" width="84" height="54" rx="18" fill="#4F46E5"/><circle cx="45" cy="60" r="10" fill="#fff"/><circle cx="75" cy="60" r="10" fill="#fff"/><circle cx="45" cy="60" r="4.5" fill="#1E1B4B"/><circle cx="75" cy="60" r="4.5" fill="#1E1B4B"/><rect x="42" y="74" width="36" height="6" rx="3" fill="#A5B4FC"/><rect x="54" y="14" width="12" height="18" rx="6" fill="#EA580C"/><circle cx="60" cy="14" r="7" fill="#F9A826"/><circle cx="26" cy="98" r="10" fill="#1E1B4B"/><circle cx="94" cy="98" r="10" fill="#1E1B4B"/></svg>
+            </div>
+            <p class="viewer-hint" id="viewerHint" data-i18n="hero.drag">✋ Drag to spin me!</p>
           </div>
         </div>
       </div>
@@ -162,7 +163,13 @@
               </span>
             </button>
           </div>
-          <div class="modes-stage" aria-hidden="true"><!-- the fixed 3D robot parks here on scroll --></div>
+          <div class="modes-stage" aria-hidden="true">
+            <!-- mood ring: the LED halo behind the robot recolours with the picked mode -->
+            <div class="mood-viz">
+              <div class="mood-glow" id="moodGlow"></div>
+              <svg viewBox="0 0 120 120" class="mood-bot"><rect x="18" y="34" width="84" height="54" rx="18" fill="#4F46E5"/><circle cx="45" cy="60" r="10" fill="#fff"/><circle cx="75" cy="60" r="10" fill="#fff"/><circle cx="45" cy="60" r="4.5" fill="#1E1B4B"/><circle cx="75" cy="60" r="4.5" fill="#1E1B4B"/><rect x="42" y="74" width="36" height="6" rx="3" fill="#A5B4FC"/><rect x="54" y="14" width="12" height="18" rx="6" fill="#EA580C"/><circle cx="60" cy="14" r="7" fill="#F9A826"/><circle cx="26" cy="98" r="10" fill="#1E1B4B"/><circle cx="94" cy="98" r="10" fill="#1E1B4B"/></svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>
