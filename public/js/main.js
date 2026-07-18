@@ -38,7 +38,7 @@
     'dl.title': 'Prêt à jouer ?',
     'dl.sub': "Télécharge l'application CarthaBot Companion — gratuite, hors-ligne, faite avec amour par FAB619.",
     'dl.btn': 'Télécharger pour Windows',
-    'dl.note': 'Windows 10/11 • Français & anglais • Sans compte',
+    'dl.note': 'Windows 10/11 • un seul .exe, lance-le • sans installation • Français & anglais',
     'specs.title': 'Sous la coque',
     'specs.sub': 'De la vraie robotique, dans un visage tout mignon.',
     'specs.s1.t': 'Vitesse max', 'specs.s2.t': 'Batterie', 'specs.s2.d': 'Li-Po 3,7 V · 1500 mAh',
