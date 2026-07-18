@@ -12,6 +12,7 @@
     'hero.sub': "Construis-le. Connecte-le. Programme-le avec des blocs colorés, un terrain de jeu 3D, des claps, des dessins et beaucoup d'imagination.",
     'hero.ctaApp': "Télécharger l'app gratuite", 'hero.ctaRobot': 'Découvrir le robot',
     'hero.badge1': '4 à 14 ans', 'hero.badge2': 'Sans compte', 'hero.badge3': 'Français & anglais',
+    'hero.drag': '✋ Fais-moi tourner !',
     'pillars.title': 'Un robot, quatre super-pouvoirs',
     'pillars.sub': "CarthaBot transforme le temps d'écran en temps de création avec un parcours complet.",
     'pillars.build.t': 'Construire', 'pillars.build.d': 'Transformer les idées en vraies structures — châssis, roues et accessoires à assembler pour un CarthaBot unique.',
@@ -108,17 +109,22 @@
 
   /* ----------------------------------------------- mode picker ------------------------------------------- */
   var MODE_COLORS = { avoider: '#F7941C', follower: '#22C55E', friendly: '#F164A2', obedient: '#587FED' };
-  document.querySelectorAll('.mode-card').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      document.querySelectorAll('.mode-card').forEach(function (b) {
-        b.classList.toggle('is-active', b === btn);
-        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-      });
-      window.dispatchEvent(new CustomEvent('cartha-mode', {
-        detail: { mode: btn.dataset.mode, color: MODE_COLORS[btn.dataset.mode] || '#4F46E5' }
-      }));
+  var moodGlow = document.getElementById('moodGlow');
+  function selectMode(btn) {
+    document.querySelectorAll('.mode-card').forEach(function (b) {
+      b.classList.toggle('is-active', b === btn);
+      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
     });
+    var color = MODE_COLORS[btn.dataset.mode] || '#4F46E5';
+    if (moodGlow) moodGlow.style.setProperty('--mood', color);
+    window.dispatchEvent(new CustomEvent('cartha-mode', { detail: { mode: btn.dataset.mode, color: color } }));
+  }
+  document.querySelectorAll('.mode-card').forEach(function (btn) {
+    btn.addEventListener('click', function () { selectMode(btn); });
   });
+  // seed the mood ring with the first (active) mode's colour
+  var firstMode = document.querySelector('.mode-card.is-active');
+  if (firstMode && moodGlow) moodGlow.style.setProperty('--mood', MODE_COLORS[firstMode.dataset.mode] || '#F7941C');
 
   /* ----------------------------------------------- lazy 3D boot ------------------------------------------ */
   // The hero renders instantly with a lightweight SVG mascot; the real WebGL robot
