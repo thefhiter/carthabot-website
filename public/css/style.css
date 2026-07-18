@@ -86,15 +86,14 @@ img, svg { vertical-align: middle; }
   max-width: 1120px; margin: 0 auto; padding: 10px var(--space-3);
   display: flex; align-items: center; gap: var(--space-3);
 }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand-mark { width: 38px; height: 38px; }
-.brand-name {
-  font-family: var(--font-head); font-weight: 700; font-size: 1.35rem;
-  color: var(--color-fg); letter-spacing: .3px;
+.brand { display: flex; align-items: center; text-decoration: none; }
+.brand-logo { height: 46px; width: auto; display: block; }
+.footer-logo {
+  height: 62px; width: auto; display: block; margin-bottom: var(--space-2);
+  /* white rounded plaque so the red mascot always reads on the navy footer */
+  background: #fff; padding: 8px 14px; border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.2);
 }
-.brand-name span { color: var(--color-accent-deep); }
-.brand-name.light { color: #fff; }
-.brand-name.light span { color: #FDBA74; }
 
 .nav-links { display: flex; gap: 4px; list-style: none; margin: 0 auto; padding: 0; }
 .nav-links a {
