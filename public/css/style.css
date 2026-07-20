@@ -356,10 +356,10 @@ h1 em { font-style: normal; color: var(--color-accent-deep); }
   height: min(3400px, 330vh);
 }
 
-/* the road itself (thick soft-grey line + dashed centre) */
-.journey-road { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 1; }
+/* the road itself — a bold soft-grey line down the left, like the original */
+.journey-road { position: absolute; left: 0; top: 0; width: 56%; height: 100%; overflow: visible; z-index: 1; }
 .road-line {
-  fill: none; stroke: #DBDBE0; stroke-width: 36;
+  fill: none; stroke: #E1E1E6; stroke-width: 52;
   stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke;
 }
 
@@ -376,21 +376,20 @@ h1 em { font-style: normal; color: var(--color-accent-deep); }
 
 /* the real robot photo, moved along the line by JS translate */
 .road-bot {
-  position: absolute; left: 0; top: 0; width: 218px; z-index: 4;
-  transform: translate(-400px, -400px);          /* off-screen until JS places it */
+  position: absolute; left: 0; top: 0; width: min(470px, 44vw); z-index: 4;
+  transform: translate(-600px, -600px);          /* off-screen until JS places it */
   will-change: transform; pointer-events: none;
-  filter: drop-shadow(0 16px 18px rgba(23,23,28,.30));
+  filter: drop-shadow(0 18px 20px rgba(23,23,28,.30));
 }
 .road-bot img { display: block; width: 100%; height: auto; }
 
 /* station callouts */
 .stations { list-style: none; margin: 0; padding: 0; }
 .station {
-  position: absolute; width: 27%; max-width: 340px; z-index: 5;
+  position: absolute; left: 58%; right: 14px; width: auto; max-width: 440px; z-index: 5;
   transform: translateY(-50%);
 }
-.station.left  { left: 0; }
-.station.right { right: 0; }
+.station.left, .station.right { left: 58%; right: 14px; }
 
 .station-card {
   background: #fff; border: 2.5px solid var(--color-border); border-radius: var(--radius-lg);
@@ -478,12 +477,12 @@ h1 em { font-style: normal; color: var(--color-accent-deep); }
 /* journey: on narrow screens the road becomes a slim left rail and every
    callout stacks full-width beside it */
 @media (max-width: 760px) {
-  .journey-track { height: min(4200px, 470vh); }
-  .journey-road { width: 58px; left: 8px; right: auto; }
-  .road-line { stroke-width: 22; }
-  .journey-flag, .journey-start, .journey-finish { left: 36px; transform: none; }
-  .road-bot { width: 120px; filter: drop-shadow(0 10px 12px rgba(23,23,28,.28)); }
-  .station, .station.left, .station.right { left: 104px; right: 10px; width: auto; max-width: none; }
+  .journey-track { height: min(4200px, 480vh); }
+  .journey-road { width: 90px; left: 6px; right: auto; }
+  .road-line { stroke-width: 30; }
+  .journey-flag, .journey-start, .journey-finish { left: 46px; transform: none; }
+  .road-bot { width: 150px; filter: drop-shadow(0 10px 12px rgba(23,23,28,.28)); }
+  .station, .station.left, .station.right { left: 120px; right: 10px; width: auto; max-width: none; }
 }
 
 @media (max-width: 480px) {

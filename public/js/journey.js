@@ -66,8 +66,8 @@
       // connector runs horizontally from the path point to the card's inner edge
       var cr = st.el.getBoundingClientRect();
       var tr2 = track.getBoundingClientRect();
-      var isRight = st.el.classList.contains('right');
-      var innerX = isRight ? (cr.left - tr2.left) : (cr.right - tr2.left);
+      var cardLeft = cr.left - tr2.left, cardRight = cr.right - tr2.left;
+      var innerX = Math.abs(cardLeft - pt.x) <= Math.abs(cardRight - pt.x) ? cardLeft : cardRight;
       var x1 = Math.min(pt.x, innerX), x2 = Math.max(pt.x, innerX);
       st.connector.style.left  = x1 + 'px';
       st.connector.style.width = Math.max(0, x2 - x1) + 'px';
@@ -105,7 +105,7 @@
     var t2 = path.getPointAtLength(Math.min(len, L + d));
     var tx = (t2.x - t1.x) / VB_W * sw, ty = (t2.y - t1.y) / VB_H * sh;
     var ang = Math.atan2(ty, tx) * 180 / Math.PI;             // ~90 heading straight down
-    var heading = Math.max(-34, Math.min(34, ang - 90));      // 0 = driving down the page
+    var heading = Math.max(-48, Math.min(48, ang - 90));      // 0 = driving down the page
     bot.style.transform = 'translate(' + ax + 'px,' + ay + 'px) translate(-50%,-50%) rotate(' + heading + 'deg)';
 
     // (kept for the SVG-robot variant) spin any wheel hubs with distance travelled
