@@ -26,12 +26,26 @@ export function start() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
   camera.up.set(0, 0, -1);             // so the robot's front (+Z) reads toward the bottom
-  camera.position.set(0, 20, 0.001);   // straight top-down plan view (top, both wheels, line-follow reads true)
+  camera.position.set(0, 18, 6);       // near top-down with a slight tilt — glossy keys + both wheels read
   camera.lookAt(0, 0, 0);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 1.3));
-  const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(5, 12, 6); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xc7d2fe, 0.8); fill.position.set(-6, 5, -5); scene.add(fill);
+  // same rig as the hero so the model reads crisp (glossy keys, red logo, warm glow)
+  scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+  const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(6, 10, 8); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xc7d2fe, 0.9); fill.position.set(-8, -2, 6); scene.add(fill);
+  const glow = new THREE.PointLight(0xf7941c, 55, 26); glow.position.set(0, -3, 4); scene.add(glow);
+
+  // soft studio "softbox" environment → glossy highlights on the keys/cover
+  try {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envScene = new THREE.Scene();
+    envScene.background = new THREE.Color(0xededf2);
+    const s1 = new THREE.Mesh(new THREE.PlaneGeometry(28, 28), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+    s1.position.set(3, 18, 9); s1.lookAt(0, 0, 0); envScene.add(s1);
+    const s2 = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+    s2.position.set(-11, 9, -3); s2.lookAt(0, 0, 0); envScene.add(s2);
+    scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+  } catch (e) { /* env is a nicety; lights already cover the basics */ }
 
   const draco = new DRACOLoader(); draco.setDecoderPath('/lib/draco/');
   const loader = new GLTFLoader(); loader.setDRACOLoader(draco);
@@ -44,6 +58,16 @@ export function start() {
     model.position.sub(c).multiplyScalar(s);
     model.scale.setScalar(s);
     model.rotation.y = Math.PI;          // face the front (sensors/caster) toward the travel direction
+    // hide the underside caster (not part of a clean top view) + make the
+    // keycaps glossier so they catch highlights like the product shot
+    model.traverse(function (o) {
+      if (!o.isMesh) return;
+      if (o.name === 'CasterDome') { o.visible = false; return; }
+      var m = o.material;
+      if (!m || m.roughness === undefined) return;
+      if (m.name === 'Keycap') { m.roughness = 0.28; m.metalness = 0.0; }
+      else if (m.name === 'Cover') { m.roughness = 0.45; }
+    });
     scene.add(model);
     model.updateMatrixWorld(true);
     setupWheels();
