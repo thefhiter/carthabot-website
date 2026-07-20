@@ -93,15 +93,20 @@
   function update() {
     var p = reduced ? 0.5 : progress();
 
-    // robot position + a gentle lean into the curve
+    // robot position
     var L = p * len;
     var a = path.getPointAtLength(L);
-    var b = path.getPointAtLength(Math.min(len, L + 2));
     var ax = offx + a.x / VB_W * sw, ay = offy + a.y / VB_H * sh;
-    var bx = offx + b.x / VB_W * sw, by = offy + b.y / VB_H * sh;
-    var ang = Math.atan2(by - ay, bx - ax) * 180 / Math.PI;   // ~90 on a vertical leg
-    var lean = Math.max(-15, Math.min(15, (ang - 90) * 0.7));  // gentle tilt into the curve
-    bot.style.transform = 'translate(' + ax + 'px,' + ay + 'px) translate(-50%,-50%) rotate(' + lean + 'deg)';
+
+    // orient the robot along the road's direction of travel (centred tangent
+    // in real pixels so it steers with the line like a real vehicle)
+    var d = 7;
+    var t1 = path.getPointAtLength(Math.max(0, L - d));
+    var t2 = path.getPointAtLength(Math.min(len, L + d));
+    var tx = (t2.x - t1.x) / VB_W * sw, ty = (t2.y - t1.y) / VB_H * sh;
+    var ang = Math.atan2(ty, tx) * 180 / Math.PI;             // ~90 heading straight down
+    var heading = Math.max(-34, Math.min(34, ang - 90));      // 0 = driving down the page
+    bot.style.transform = 'translate(' + ax + 'px,' + ay + 'px) translate(-50%,-50%) rotate(' + heading + 'deg)';
 
     // (kept for the SVG-robot variant) spin any wheel hubs with distance travelled
     var turn = p * len * 4;
