@@ -159,6 +159,10 @@
       // No WebGL / blocked module? The SVG mascot simply stays — the page still works.
       console.warn('3D disabled:', err && err.message);
     });
+    // the journey line's 3D robot (independent; falls back to the still photo)
+    import('/js/journey3d.js').then(function (m) { m.start(); }).catch(function (err) {
+      console.warn('journey 3D disabled:', err && err.message);
+    });
   }
   if (document.readyState === 'complete') scheduleBoot();
   else window.addEventListener('load', scheduleBoot, { once: true });

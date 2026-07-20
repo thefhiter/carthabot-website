@@ -124,6 +124,9 @@
 
     // extra LED shimmer while parked at the RGB-LED station
     if (ledStation) bot.classList.toggle('leds-hot', Math.abs(p - ledStation.frac) < 0.07);
+
+    // roll the 3D robot's wheels with scroll progress (if the 3D model is up)
+    if (window.__roadBot3d) window.__roadBot3d.update(p);
   }
 
   // ---- reveal cards as they enter the viewport ----
