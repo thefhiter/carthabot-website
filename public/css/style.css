@@ -376,10 +376,10 @@ h1 em { font-style: normal; color: var(--color-accent-deep); }
 
 /* the real robot photo, moved along the line by JS translate */
 .road-bot {
-  position: absolute; left: 0; top: 0; width: 154px; z-index: 4;
-  transform: translate(-300px, -300px);          /* off-screen until JS places it */
+  position: absolute; left: 0; top: 0; width: 218px; z-index: 4;
+  transform: translate(-400px, -400px);          /* off-screen until JS places it */
   will-change: transform; pointer-events: none;
-  filter: drop-shadow(0 14px 14px rgba(23,23,28,.28));
+  filter: drop-shadow(0 16px 18px rgba(23,23,28,.30));
 }
 .road-bot img { display: block; width: 100%; height: auto; }
 
@@ -482,7 +482,7 @@ h1 em { font-style: normal; color: var(--color-accent-deep); }
   .journey-road { width: 58px; left: 8px; right: auto; }
   .road-line { stroke-width: 22; }
   .journey-flag, .journey-start, .journey-finish { left: 36px; transform: none; }
-  .road-bot { width: 92px; filter: drop-shadow(0 8px 10px rgba(23,23,28,.25)); }
+  .road-bot { width: 120px; filter: drop-shadow(0 10px 12px rgba(23,23,28,.28)); }
   .station, .station.left, .station.right { left: 104px; right: 10px; width: auto; max-width: none; }
 }
 
