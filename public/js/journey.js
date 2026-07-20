@@ -98,15 +98,8 @@
     var a = path.getPointAtLength(L);
     var ax = offx + a.x / VB_W * sw, ay = offy + a.y / VB_H * sh;
 
-    // orient the robot along the road's direction of travel (centred tangent
-    // in real pixels so it steers with the line like a real vehicle)
-    var d = 7;
-    var t1 = path.getPointAtLength(Math.max(0, L - d));
-    var t2 = path.getPointAtLength(Math.min(len, L + d));
-    var tx = (t2.x - t1.x) / VB_W * sw, ty = (t2.y - t1.y) / VB_H * sh;
-    var ang = Math.atan2(ty, tx) * 180 / Math.PI;             // ~90 heading straight down
-    var heading = Math.max(-48, Math.min(48, ang - 90));      // 0 = driving down the page
-    bot.style.transform = 'translate(' + ax + 'px,' + ay + 'px) translate(-50%,-50%) rotate(' + heading + 'deg)';
+    // keep the robot upright — the clean top-down product-shot orientation
+    bot.style.transform = 'translate(' + ax + 'px,' + ay + 'px) translate(-50%,-50%)';
 
     // (kept for the SVG-robot variant) spin any wheel hubs with distance travelled
     var turn = p * len * 4;

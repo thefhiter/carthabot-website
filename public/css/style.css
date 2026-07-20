@@ -376,7 +376,7 @@ h1 em { font-style: normal; color: var(--color-accent-deep); }
 
 /* the real robot photo, moved along the line by JS translate */
 .road-bot {
-  position: absolute; left: 0; top: 0; width: min(470px, 44vw); aspect-ratio: 1.12;
+  position: absolute; left: 0; top: 0; width: min(400px, 40vw); aspect-ratio: 1.12;
   z-index: 4;
   transform: translate(-600px, -600px);          /* off-screen until JS places it */
   will-change: transform; pointer-events: none;
