@@ -208,9 +208,10 @@
         <span class="journey-flag journey-start" data-i18n="tour.start">Start</span>
         <span class="journey-flag journey-finish" data-i18n="tour.finish">🏁 Ready to roll</span>
 
-        <!-- the real CarthaBot rides the line (same format as the original site) -->
+        <!-- the real 3D CarthaBot (same model as the hero) rides the line -->
         <div class="road-bot" id="roadBot" aria-hidden="true">
-          <img src="/assets/robot-photo.png" alt="" width="497" height="359" decoding="async" />
+          <canvas id="roadBotCanvas"></canvas>
+          <img class="road-bot-fallback" src="/assets/robot-photo.png" alt="" width="497" height="359" decoding="async" />
         </div>
 
         <!-- station callouts: each maps to a real CarthaBot function -->
