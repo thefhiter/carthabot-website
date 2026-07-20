@@ -43,7 +43,7 @@ export function start() {
     const s = 9.6 / Math.max(sz.x, sz.y, sz.z);
     model.position.sub(c).multiplyScalar(s);
     model.scale.setScalar(s);
-    model.rotation.y = 0;                // +Z front points toward the bottom of the view
+    model.rotation.y = Math.PI;          // face the front (sensors/caster) toward the travel direction
     scene.add(model);
     model.updateMatrixWorld(true);
     setupWheels();
