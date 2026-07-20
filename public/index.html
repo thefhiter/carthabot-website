@@ -71,7 +71,6 @@
             <div class="stage-placeholder" id="stagePlaceholder" aria-hidden="true">
               <svg viewBox="0 0 120 120" class="placeholder-bot"><rect x="18" y="34" width="84" height="54" rx="18" fill="#4F46E5"/><circle cx="45" cy="60" r="10" fill="#fff"/><circle cx="75" cy="60" r="10" fill="#fff"/><circle cx="45" cy="60" r="4.5" fill="#1E1B4B"/><circle cx="75" cy="60" r="4.5" fill="#1E1B4B"/><rect x="42" y="74" width="36" height="6" rx="3" fill="#A5B4FC"/><rect x="54" y="14" width="12" height="18" rx="6" fill="#EA580C"/><circle cx="60" cy="14" r="7" fill="#F9A826"/><circle cx="26" cy="98" r="10" fill="#1E1B4B"/><circle cx="94" cy="98" r="10" fill="#1E1B4B"/></svg>
             </div>
-            <p class="viewer-hint" id="viewerHint" data-i18n="hero.drag">✋ Drag to spin me!</p>
           </div>
         </div>
       </div>
@@ -191,6 +190,91 @@
       </div>
     </section>
 
+    <!-- ==================== Road journey (scroll-driven) ==================== -->
+    <section class="section journey" id="tour" aria-label="A guided tour of the real CarthaBot">
+      <div class="container journey-head">
+        <p class="section-kicker reveal" data-i18n="tour.kicker">Follow the line</p>
+        <h2 class="reveal" data-i18n="tour.title">Take CarthaBot for a drive</h2>
+        <p class="section-sub reveal" data-i18n="tour.sub">Scroll to roll CarthaBot down the track. Every stop is a real part, doing a real job.</p>
+      </div>
+
+      <div class="journey-track" id="journeyTrack">
+        <!-- winding road (same soft-grey line as the original site) -->
+        <svg class="journey-road" id="journeyRoad" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path id="roadPath" class="road-line" d="M50 12 C30 58 30 100 50 148 C70 196 70 238 50 285 C30 333 30 375 50 423 C70 470 70 512 50 560 C30 608 30 650 50 698 C70 745 70 787 50 835 C30 882 30 924 50 968" />
+        </svg>
+
+        <!-- start / finish flags -->
+        <span class="journey-flag journey-start" data-i18n="tour.start">Start</span>
+        <span class="journey-flag journey-finish" data-i18n="tour.finish">🏁 Ready to roll</span>
+
+        <!-- the real CarthaBot rides the line (same format as the original site) -->
+        <div class="road-bot" id="roadBot" aria-hidden="true">
+          <img src="/assets/robot-photo.png" alt="" width="497" height="359" decoding="async" />
+        </div>
+
+        <!-- station callouts: each maps to a real CarthaBot function -->
+        <ol class="stations">
+          <li class="station left is-active" style="top:7%" data-frac="0.07" data-color="#00A651">
+            <div class="station-card">
+              <span class="st-icon" style="--mc:#00A651"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c3-6 5-6 8 0M12 18c3 6 5 6 8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+              <h3 data-i18n="tour.line.t">Line follower</h3>
+              <p data-i18n="tour.line.d">Seven infrared eyes read the black line 100 times a second and keep CarthaBot glued to the track.</p>
+              <span class="st-chip" style="--mc:#00A651" data-i18n="tour.line.c">7× IR array · Line-follow mode</span>
+            </div>
+          </li>
+          <li class="station right" style="top:21%" data-frac="0.21" data-color="#F5821F">
+            <div class="station-card">
+              <span class="st-icon" style="--mc:#F5821F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v6M12 3 8 7M12 3l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="12" width="16" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+              <h3 data-i18n="tour.avoid.t">Obstacle avoider</h3>
+              <p data-i18n="tour.avoid.d">Two forward-facing IR detectors spot walls ahead, and CarthaBot politely steers around them.</p>
+              <span class="st-chip" style="--mc:#F5821F" data-i18n="tour.avoid.c">2× front IR · Avoider mode</span>
+            </div>
+          </li>
+          <li class="station left" style="top:36%" data-frac="0.36" data-color="#14ADE5">
+            <div class="station-card">
+              <span class="st-icon" style="--mc:#14ADE5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a10 10 0 0 1 14 0M8 15a6 6 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18.5" r="1.6" fill="currentColor"/></svg></span>
+              <h3 data-i18n="tour.remote.t">Remote control</h3>
+              <p data-i18n="tour.remote.d">An IR receiver listens to the little remote, so you can drive CarthaBot from across the room.</p>
+              <span class="st-chip" style="--mc:#14ADE5" data-i18n="tour.remote.c">IR receiver · 38 kHz</span>
+            </div>
+          </li>
+          <li class="station right" style="top:50%" data-frac="0.50" data-color="#F164A2">
+            <div class="station-card">
+              <span class="st-icon" style="--mc:#F164A2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l-1 8h3l-8 10 2-8H8L9 3Z" fill="currentColor"/></svg></span>
+              <h3 data-i18n="tour.leds.t">13 RGB LEDs</h3>
+              <p data-i18n="tour.leds.d">Thirteen controllable RGB LEDs paint CarthaBot any colour you like — one block lights them all.</p>
+              <span class="st-chip st-code" style="--mc:#F164A2"><b>LED</b> all · R 255 G 0 B 0 · 1s</span>
+            </div>
+          </li>
+          <li class="station left" style="top:64%" data-frac="0.64" data-color="#587FED">
+            <div class="station-card">
+              <span class="st-icon" style="--mc:#587FED"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 12 15 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg></span>
+              <h3 data-i18n="tour.tune.t">Tunable sensors</h3>
+              <p data-i18n="tour.tune.d">Tiny potentiometers let you fine-tune the front, rear and line sensors with a small screwdriver.</p>
+              <span class="st-chip" style="--mc:#587FED" data-i18n="tour.tune.c">3× potentiometers</span>
+            </div>
+          </li>
+          <li class="station right" style="top:79%" data-frac="0.79" data-color="#F7C41C">
+            <div class="station-card">
+              <span class="st-icon" style="--mc:#E0A800"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="16" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m11 9-2 3h3l-2 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <h3 data-i18n="tour.power.t">All-day power</h3>
+              <p data-i18n="tour.power.d">A 3.7 V 1500 mAh Li-Po battery keeps the fun going for two hours or more on a single charge.</p>
+              <span class="st-chip" style="--mc:#E0A800" data-i18n="tour.power.c">Li-Po 3.7 V · 1500 mAh · 2h+</span>
+            </div>
+          </li>
+          <li class="station left" style="top:93%" data-frac="0.93" data-color="#E8232A">
+            <div class="station-card">
+              <span class="st-icon" style="--mc:#E8232A"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+              <h3 data-i18n="tour.brain.t">Brain &amp; wireless</h3>
+              <p data-i18n="tour.brain.d">An RP2040 brain runs MicroPython and beams your programs over USB, Wi-Fi or Bluetooth.</p>
+              <span class="st-chip" style="--mc:#E8232A" data-i18n="tour.brain.c">RP2040 · USB · Wi-Fi · BLE</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- ==================== Companion App ==================== -->
     <section class="section section-app" id="app">
       <div class="container">
@@ -296,5 +380,6 @@
   </footer>
 
   <script src="/js/main.js" defer></script>
+  <script src="/js/journey.js" defer></script>
 </body>
 </html>
