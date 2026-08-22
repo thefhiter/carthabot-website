@@ -22,17 +22,27 @@ export function start() {
   } catch (e) { return; }              // no WebGL → keep the fallback photo
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true;                 // so the raised keys cast shadows and read
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
   camera.up.set(0, 0, -1);             // so the robot's front (+Z) reads toward the bottom
-  camera.position.set(0, 18, 6);       // near top-down with a slight tilt — glossy keys + both wheels read
-  camera.lookAt(0, 0, 0);
+  camera.position.set(0, 13.5, 10.5);  // ~38deg top angle like the product shot — the raised keys read
+  camera.lookAt(0, 0.7, 0);
 
   // same rig as the hero so the model reads crisp (glossy keys, red logo, warm glow)
-  scene.add(new THREE.AmbientLight(0xffffff, 1.0));
-  const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(6, 10, 8); scene.add(key);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+  const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(6, 12, 7);
+  key.castShadow = true;
+  key.shadow.mapSize.set(1024, 1024);
+  key.shadow.camera.near = 1; key.shadow.camera.far = 60;
+  key.shadow.camera.left = -9; key.shadow.camera.right = 9;
+  key.shadow.camera.top = 9; key.shadow.camera.bottom = -9;
+  key.shadow.bias = -0.0004;
+  scene.add(key);
   const fill = new THREE.DirectionalLight(0xc7d2fe, 0.9); fill.position.set(-8, -2, 6); scene.add(fill);
+  const top = new THREE.DirectionalLight(0xffffff, 1.6); top.position.set(2, 20, 5); scene.add(top);
   const glow = new THREE.PointLight(0xf7941c, 55, 26); glow.position.set(0, -3, 4); scene.add(glow);
 
   // soft studio "softbox" environment → glossy highlights on the keys/cover
@@ -57,16 +67,17 @@ export function start() {
     const s = 9.6 / Math.max(sz.x, sz.y, sz.z);
     model.position.sub(c).multiplyScalar(s);
     model.scale.setScalar(s);
-    model.rotation.y = Math.PI;          // face the front (sensors/caster) toward the travel direction
+    model.rotation.y = 0;                // D-pad / logo face up toward the camera (like the hero)
     // hide the underside caster (not part of a clean top view) + make the
     // keycaps glossier so they catch highlights like the product shot
     model.traverse(function (o) {
       if (!o.isMesh) return;
       if (o.name === 'CasterDome') { o.visible = false; return; }
+      o.castShadow = true; o.receiveShadow = true;
       var m = o.material;
       if (!m || m.roughness === undefined) return;
-      if (m.name === 'Keycap') { m.roughness = 0.28; m.metalness = 0.0; }
-      else if (m.name === 'Cover') { m.roughness = 0.45; }
+      if (m.name === 'Keycap') { m.roughness = 0.16; m.metalness = 0.0; m.envMapIntensity = 2.0; }
+      else if (m.name === 'Cover') { m.roughness = 0.34; m.envMapIntensity = 1.3; }
     });
     scene.add(model);
     model.updateMatrixWorld(true);
